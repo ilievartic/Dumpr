@@ -9,6 +9,8 @@ The "smart parking meter" runs on a Raspberry Pi, and can transmit license plate
 
 ### Building and Running
 << add stuff >>
+###Particle Boron and Xenon Setup
+Particle is a upcoming startup company with microcontroller boards aiding IoT. We used the particle boron and the particle xenon boards supporting LTE and ethernet each respectively. We used a featherwing adapter board for the xenon. Installed cli on our laptops and setup, authenticated and identified serial numbers of the boards. We used a Google Project Fi LTE data card for the boron board in order to improve poratability and show the usage of this board in remote areas without wifi access. Connected both boards to the internet, waited for confirmation from the lights, wrote the code for the board and flashed it using particle cloud.
 
 ### Contributing
 
