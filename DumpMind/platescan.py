@@ -4,6 +4,18 @@ import time
 import json
 import subprocess
 import serial
+import requests
+import datetime
+
+url = "http://35.188.64.208:80/getfuel"
+payload = "{\n\t\"space_id\": \"12345\",\n\t\"time\": \"%sZ\",\n\t\"plate_num\": \"%s\"\n}"
+headers = {
+    'Content-Type': "application/json",
+    'cache-control': "no-cache",
+    'Postman-Token': "4a793993-b0bf-4489-903b-9e422fea59d0"
+    }
+
+sendWifi = True
 
 ser = serial.Serial(
     port='/dev/ttyAMA0',
@@ -34,7 +46,13 @@ while True:
         if ( len(data["results"]) > 0 and data["results"][0]["confidence"] > 85.0 ):
             print "%s conf:%.2f cycletime:%.2f" % (data["results"][0]["plate"], data["results"][0]["confidence"], stop)
             out = "%s\n" % data["results"][0]["plate"]
-            ser.write(out.encode())
+            if( sendWifi ):
+                dt = datetime.datetime.now()+datetime.timedelta(hours=5)
+                response = requests.request("POST", url, data=(payload % (dt.isoformat(), data["results"][0]["plate"])), headers=headers, timeout=5)
+            else:
+                ser.write(out.encode())
+        elif (not sendWifi):
+            ser.write(" \n".encode())
     
     time.sleep(0.1)
 
