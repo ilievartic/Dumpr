@@ -6,10 +6,18 @@
         <link href="static/bootstrap.min.css" rel ="stylesheet" media="screen">
     </head>
     <body>
-        <div class="container">
-            <h1>Welcome to ParkMe!</h1>
-            <br>
-            <p>Click <a href="/api">here</a> to register.</p>
-        </div>
+        <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+                <div class="container-fluid" id="head">
+                    <div class="navbar-header">
+                        
+                        <h1>Welcome to ParkMe</h1>
+                        <br>
+                    </div>
+                        
+                        <p><a href="/login">Login</a></p>
+                        <p><a href="/api">Register</a></p>
+                    </div>
+        </nav>
+        <h1> {{ var }}</h1>
     </body>
-</html>
+</html> 
