@@ -21,7 +21,7 @@ cam.set(4,1080)
 
 while True:
     start = time.time()
-    for i in range(7):
+    for i in range(8):
         # empty the framebuffer
         ret, frame = cam.read()
     if ret:
@@ -33,7 +33,7 @@ while True:
         stop =  time.time() - start
         if ( len(data["results"]) > 0 and data["results"][0]["confidence"] > 85.0 ):
             print "%s conf:%.2f cycletime:%.2f" % (data["results"][0]["plate"], data["results"][0]["confidence"], stop)
-            out = "'%s'" % data["results"][0]["plate"]
+            out = "%s\n" % data["results"][0]["plate"]
             ser.write(out.encode())
     
     time.sleep(0.1)
