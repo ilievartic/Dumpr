@@ -10,7 +10,8 @@ If you notice a bug that needs fixing, report them to shangxz@umich.edu, or open
 <h2> Add or Expand Features </h2>
 What ParkMe has implemented currently:
 * Recognition of license plates
-* Communication to our central server over WiFi/LTE
+* Communication to our central server over WiFi
+* Communication to our central server over LTE using Particle Boron IoT Platform
 * Implementation on Raspberry Pi as detection endpoint
 
 Contributions we're looking for:
