@@ -18,5 +18,6 @@ Contributions we're looking for:
 * More stable LTE performance
 * Compatibility with upcoming 5GE and 5G standards
 * Compatibility with more endpoints and cameras, rather than just Raspberry Pi
+* Video feed monitoring for security
 
 If you would like to improve one of our current features or add new ones, you can fork this repository and create a pull request with your code. Once we get a pull request, we'll discuss the new code with you before merging it to our repository. Feel free to contact us about any ideas as well (see "Contact Us" above).
