@@ -1,28 +1,63 @@
+
 <!DOCTYPE html>
+
+
 <html>
-  <head>
-    <title>ParkMe register</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="static/bootstrap.min.css" rel="stylesheet" media="screen">
-  </head>
-  <body>
-    <div class="container">
-      <h1>Create account</h1>
-      <br>
-      <form action="" method="post">
-        <input type="text" placeholder="First Name" name="firstname" value="{{
-          request.form.firstname }}">
-          <br>
-         <input type="text" placeholder="Last Name" name="lastname" value="{{
-          request.form.lastname }}">
-          <br>
-          <input type="text" placeholder="License Plate Number" name="lpn" value="{{
-            request.form.lpn }}">
-        <input class="btn btn-primary" type="submit" value="Register">
-      </form>
-      {% if error %}
-        <p class="error"><strong>Error:</strong> {{ error }}
-      {% endif %}
-    </div>
-  </body>
+
+    
+    <head>
+        <title>Sign Up</title>
+    </head>
+    
+    <style>
+    
+        *{margin: 0; padding: 0;}
+        body{background: #ecf1f4; font-family: sans-serif;}
+        
+        .form-wrap{ width: 320px; background: #3e3d3d; padding: 40px 20px; box-sizing: border-box; position: fixed; left: 50%; top: 50%; transform: translate(-50%, -50%);}
+        h1{text-align: center; color: #fff; font-weight: normal; margin-bottom: 20px;}
+        
+        input{width: 100%; background: none; border: 1px solid #fff; border-radius: 3px; padding: 6px 15px; box-sizing: border-box; margin-bottom: 20px; font-size: 16px; color: #fff;}
+        
+        input[type="button"]{ background: #bac675; border: 0; cursor: pointer; color: #3e3d3d;}
+        input[type="button"]:hover{ background: #a4b15c; transition: .6s;}
+        
+        ::placeholder{color: #fff;}
+    
+    </style>
+
+    <body>
+    
+        <div class="form-wrap">
+        
+            <form action="" method="post">
+            
+                <h1>Sign Up</h1>
+                <input type="text" placeholder="First Name" name="firstname" value="{{
+                  request.form.firstname }}">
+                  <br>
+                 <input type="text" placeholder="Last Name" name="lastname" value="{{
+                  request.form.lastname }}">
+                  <br>
+                  <input type="text" placeholder="License Plate Number" name="lpn" value="{{
+                    request.form.lpn }}">
+                <input class="btn btn-default" type="submit" value="Register">
+                <a href = "/welcome">
+                  <div id = "button">
+                  
+                  <button type="button" >back</button>
+                  </div>
+                  </a>
+            </form>
+          {% if error %}
+          <p class="error"><strong>Error:</strong> {{ error }}
+          {% endif %}
+        </div>
+    
+    
+    
+    </body>
+
+
+
 </html>

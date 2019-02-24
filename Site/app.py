@@ -24,7 +24,20 @@ def home():
 
 @app.route('/welcome')
 def welcome():
-    return render_template("welcome.html")
+    
+    url = "http://35.188.64.208:80/stats"
+
+    payload = "{\n\t\"space_id\": \"12345\",\n\t\"plate_num\": \"ASSMAN\"\n}"
+    headers = {
+    'Content-Type': "application/json",
+    'cache-control': "no-cache",
+    'Postman-Token': "76bc076b-49bb-4145-9300-8b0472e5a6b9"
+    }
+
+    response = requests.request("POST", url, data=payload, headers=headers)
+    print(response.text)
+    
+    return render_template("welcome.html", var=response.text)
 
 @app.route('/api', methods=['GET', 'POST'])
 def api():
@@ -61,6 +74,18 @@ def login():
         else:
             session['logged_in'] = True
             #flash('You were just logged in')
+            flash('You logged in')
+            url = "http://35.188.64.208:80/create"
+
+            payload = "plate_num=%s" %(request.form['lpn'])
+            #print(payload)
+            headers = {
+                'Content-Type': "application/x-www-form-urlencoded",
+                'cache-control': "no-cache",
+                'Postman-Token': "ef1ecc98-41eb-42cb-bb1b-290cdd7a6e15"
+                }
+
+            response = requests.request("POST", url, data=payload, headers=headers)
             return redirect(url_for('home'))
     return render_template('login.html', error=error)
 
