@@ -1,5 +1,6 @@
 from flask import Flask,flash, render_template,session, redirect, url_for, request
 from functools import wraps
+import requests
 app = Flask(__name__)
 
 app.secret_key = "my precious"
@@ -14,17 +15,41 @@ def login_required(f):
             return redirect(url_for('login'))
     return wrap
 
-@app.route('/', methods=['GET', 'POST'])
-@login_required
+@app.route('/', methods=['GET', 'POST']) #@login_required
 def home():
     #35.188.64.208:80/create
     if request.method == 'POST':
         flash("TEST")
-    return render_template("index.html")
+    return render_template("welcome.html")
 
 @app.route('/welcome')
 def welcome():
     return render_template("welcome.html")
+
+@app.route('/api', methods=['GET', 'POST'])
+def api():
+    error = None
+    if request.method == 'POST':
+            #session['logged_in'] = True
+            flash('You registered')
+            url = "http://35.188.64.208:80/create"
+
+            payload = "first_name=%s&last_name=%s&plate_num=%s" %(request.form['firstname'],request.form['lastname'],request.form['lpn'])
+            #print(payload)
+            headers = {
+                'Content-Type': "application/x-www-form-urlencoded",
+                'cache-control': "no-cache",
+                'Postman-Token': "ef1ecc98-41eb-42cb-bb1b-290cdd7a6e15"
+                }
+
+            response = requests.request("POST", url, data=payload, headers=headers)
+            #error = 'yp'
+            #print(response.text)
+            return redirect(url_for('welcome'))
+    return render_template('api.html',error=error)
+    #return render_template('login.html', error=error)
+    
+    
 
 # Route for handling the login page logic
 @app.route('/login', methods=['GET', 'POST'])
