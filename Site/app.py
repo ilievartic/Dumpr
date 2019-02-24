@@ -1,9 +1,16 @@
 from flask import Flask,flash, render_template,session, redirect, url_for, request
 from functools import wraps
 import requests
+import json
+
 app = Flask(__name__)
 
 app.secret_key = "my precious"
+
+prev_response = -1
+prev_response1 = -1
+prev_response2 = -1
+prev_response3 = -1
 
 def login_required(f):
     @wraps(f)
@@ -63,8 +70,18 @@ def welcome():
     }
 
     response3 = requests.request("POST", url, data=payload, headers=headers)
+
+    prev_response = json.loads(response.text)['License DZVG49']
+    prev_response1 = json.loads(response.text)
+    prev_response2 = json.loads(response.text)
+    prev_response3 = json.loads(response.text)
     
-    return render_template("welcome.html", var=response.text, var1=response1.text, var2=response2.text, var3=response3.text)
+    return render_template("welcome.html", 
+        merch=('Merchant', json.loads(response.text)['merchant']),
+        var=('License DZVG49', "$" + str(json.loads(response.text)['License DZVG49'])), 
+        var1=('License BKTP665', "$" + str(json.loads(response1.text)['License BKTP665'])), #BKTP665
+        var2=('License SSTARZZ', "$" + str(json.loads(response2.text)['License SSTARZZ'])), #SSTARZZ
+        var3=('License N0GSTNK', "$" + str(json.loads(response3.text)['License N0GSTNK']))) #N0GSTNK
 
 @app.route('/api', methods=['GET', 'POST'])
 def api():
