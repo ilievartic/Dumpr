@@ -27,7 +27,7 @@ def welcome():
     
     url = "http://35.188.64.208:80/stats"
 
-    payload = "{\n\t\"space_id\": \"12345\",\n\t\"plate_num\": \"6LICK274\"\n}"
+    payload = "{\n\t\"space_id\": \"12345\",\n\t\"plate_num\": \"DZVG49\"\n}"
     headers = {
     'Content-Type': "application/json",
     'cache-control': "no-cache",
@@ -35,9 +35,36 @@ def welcome():
     }
 
     response = requests.request("POST", url, data=payload, headers=headers)
-    print(response.text)
+
+    payload = "{\n\t\"space_id\": \"12345\",\n\t\"plate_num\": \"BKTP665\"\n}"
+    headers = {
+    'Content-Type': "application/json",
+    'cache-control': "no-cache",
+    'Postman-Token': "76bc076b-49bb-4145-9300-8b0472e5a6b9"
+    }
+
+    response1 = requests.request("POST", url, data=payload, headers=headers)
+
+
+    payload = "{\n\t\"space_id\": \"12345\",\n\t\"plate_num\": \"SSTARZZ\"\n}"
+    headers = {
+    'Content-Type': "application/json",
+    'cache-control': "no-cache",
+    'Postman-Token': "76bc076b-49bb-4145-9300-8b0472e5a6b9"
+    }
+
+    response2 = requests.request("POST", url, data=payload, headers=headers)
+
+    payload = "{\n\t\"space_id\": \"12345\",\n\t\"plate_num\": \"N0GSTNK\"\n}"
+    headers = {
+    'Content-Type': "application/json",
+    'cache-control': "no-cache",
+    'Postman-Token': "76bc076b-49bb-4145-9300-8b0472e5a6b9"
+    }
+
+    response3 = requests.request("POST", url, data=payload, headers=headers)
     
-    return render_template("welcome.html", var=response.text)
+    return render_template("welcome.html", var=response.text, var1=response1.text, var2=response2.text, var3=response3.text)
 
 @app.route('/api', methods=['GET', 'POST'])
 def api():
