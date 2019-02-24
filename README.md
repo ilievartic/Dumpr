@@ -8,7 +8,20 @@ ParkMe is an automated parking-meter platform. A camera in each parking spot rec
 The "smart parking meter" runs on a Raspberry Pi, and can transmit license plate/timestamp data to a centralized server via WiFi. These parking meters are also portable, as the raspberry pi can be connected to an LTE endpoint. In this way, users can buy a fairly cheap meter and convert part of their own property into a paid parking spot. (This can be used, for example, on a football gameday where parking near a stadium may be scarce.) This repository contains a proof-of-concept demo of the parking meter communicating with the server over LTE, using the Particle Boron IoT platform.
 
 ### Building and Running
-<< add stuff >>
+
+
+#### Pi Backend
+The backend is intended to run on a low power embedded device such as a Raspberry Pi.
+The device has a V4L2 camera device attached and a serial link with the LTE device for data transmission. There is also an optional Wifi transmission backend in the event that LTE is not available.
+Prerequisites:
++ OpenAlpr (Plate Recognition)
++ Python2
++ OpenCV
++ pySerial
++ fbi (framebuffer imageviewer) (optional)
+
+Simply running the python script with `./platescan.py` will begin plate scanning and transmit over serial. Optinally setting the flag `sendWifi` to true will disable the LTE over serial connection and will send data over wifi.
+Optionally, view frames on an attached monitor the script `./viewer.sh` can be used.
 
 ### Contributing
 
