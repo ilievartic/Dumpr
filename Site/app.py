@@ -1,10 +1,26 @@
-from flask import Flask, render_template, redirect, url_for, request
-
+from flask import Flask,flash, render_template,session, redirect, url_for, request
+from functools import wraps
 app = Flask(__name__)
 
-@app.route('/')
+app.secret_key = "my precious"
+
+def login_required(f):
+    @wraps(f)
+    def wrap(*args, **kwargs):
+        if 'logged_in' in session:
+            return f(*args,**kwargs)
+        else:
+            #flash('You need to login first.')
+            return redirect(url_for('login'))
+    return wrap
+
+@app.route('/', methods=['GET', 'POST'])
+@login_required
 def home():
-    return "Main Page"
+    #35.188.64.208:80/create
+    if request.method == 'POST':
+        flash("TEST")
+    return render_template("index.html")
 
 @app.route('/welcome')
 def welcome():
@@ -15,11 +31,20 @@ def welcome():
 def login():
     error = None
     if request.method == 'POST':
-        if request.form['username'] != 'admin' or request.form['password'] != 'admin':
+        if request.form['username'] != 'park' or request.form['password'] != 'me':
             error = 'Invalid Credentials. Please try again.'
         else:
+            session['logged_in'] = True
+            #flash('You were just logged in')
             return redirect(url_for('home'))
     return render_template('login.html', error=error)
+
+@app.route('/logout')
+@login_required
+def logout():
+    session.pop('logged_in', None)
+    #flash('You were just logged out')
+    return redirect(url_for('welcome'))
 
 if __name__ == "__main__":
     app.run(debug=True)
