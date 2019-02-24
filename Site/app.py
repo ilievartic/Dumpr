@@ -27,7 +27,7 @@ def welcome():
     
     url = "http://35.188.64.208:80/stats"
 
-    payload = "{\n\t\"space_id\": \"12345\",\n\t\"plate_num\": \"ASSMAN\"\n}"
+    payload = "{\n\t\"space_id\": \"12345\",\n\t\"plate_num\": \"6LICK274\"\n}"
     headers = {
     'Content-Type': "application/json",
     'cache-control': "no-cache",
